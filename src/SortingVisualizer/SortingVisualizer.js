@@ -12,8 +12,9 @@ import Navbar from "reactjs-navbar";
 import logo from "../logo.svg";
 import sv from "../sv.PNG";
 import Loader from "react-loader-spinner";
+import App from '../App.js';
 
-const fast = 0.5 ;
+const fast = 3 ;
 
 export default class SortingVisualizer extends Component{
     constructor(props){
@@ -38,15 +39,25 @@ export default class SortingVisualizer extends Component{
      
 
     
-
+    
     resetArray=()=>{
+      
+      
         const array = [];
-        for(let i = 0; i<15; i++){
+        for(let i = 0; i<10; i++){
             array.push(Math.floor(Math.random() * (50 - 5)) + 5);
         }
         this.setState({array:array});
         console.log(array);
     }
+
+    refreshPage=() =>{
+      window.location.reload();
+    }
+
+    toggleDarkMode = () => {
+      this.setState((prevState) => ({ darkMode: !prevState.darkMode }));
+    };
 
 
 
@@ -73,8 +84,8 @@ export default class SortingVisualizer extends Component{
 
             setTimeout(()=>{
 
-              arrayBars[comparison[0]].style.backgroundColor = 'red';
-              arrayBars[comparison[1]].style.backgroundColor = 'red';
+              arrayBars[comparison[0]].style.backgroundColor = 'black';
+              arrayBars[comparison[1]].style.backgroundColor = 'black';
 
               
 
@@ -91,7 +102,7 @@ export default class SortingVisualizer extends Component{
                           setTimeout(() => {
 
                             // arrayBars[comparison[1]].style.backgroundColor = 'darkorchid';
-                            arrayBars[comparison[0]].style.backgroundColor = 'yellowgreen';
+                            arrayBars[comparison[0]].style.backgroundColor = 'green';
             
                                         },300/fast) ;
                 
@@ -100,7 +111,7 @@ export default class SortingVisualizer extends Component{
                         setTimeout(() => {
 
                           arrayBars[comparison[1]].style.backgroundColor = 'darkorchid';
-                          arrayBars[comparison[0]].style.backgroundColor = 'yellowgreen';
+                          arrayBars[comparison[0]].style.backgroundColor = 'green';
           
                                       },300/fast) ;
                 
@@ -118,9 +129,9 @@ export default class SortingVisualizer extends Component{
             
             setTimeout(()=>{
                 
-                arrayBars[comparison[0]].style.backgroundColor = 'red';
-                arrayBars[comparison[1]].style.backgroundColor = 'red';
-                arrayBars[comparison[2]].style.backgroundColor = 'pink';
+                arrayBars[comparison[0]].style.backgroundColor = 'black';
+                arrayBars[comparison[1]].style.backgroundColor = 'black';
+                arrayBars[comparison[2]].style.backgroundColor = 'rgb(241, 146, 178)';
 
                 
                 
@@ -190,8 +201,8 @@ export default class SortingVisualizer extends Component{
 
                             setTimeout(() => {
 
-                              arrayBars[comparison[0]].style.backgroundColor = 'yellowgreen';
-                              arrayBars[comparison[1]].style.backgroundColor = 'yellowgreen';
+                              arrayBars[comparison[0]].style.backgroundColor = 'green';
+                              arrayBars[comparison[1]].style.backgroundColor = 'green';
               
                                           },300/fast) ;
 
@@ -201,7 +212,7 @@ export default class SortingVisualizer extends Component{
                             setTimeout(() => {
 
                               arrayBars[comparison[0]].style.backgroundColor = 'darkorchid';
-                              arrayBars[comparison[1]].style.backgroundColor = 'yellowgreen';
+                              arrayBars[comparison[1]].style.backgroundColor = 'green';
               
                                           },300/fast) ;
 
@@ -259,7 +270,7 @@ export default class SortingVisualizer extends Component{
                         const temp_height=arrayBars[comparison[0]].style.height;
                         arrayBars[comparison[0]].style.height=arrayBars[comparison[1]].style.height;
                         arrayBars[comparison[1]].style.height=temp_height;
-                        arrayBars[comparison[1]].style.backgroundColor = 'yellowgreen';
+                        arrayBars[comparison[1]].style.backgroundColor = 'green';
 
                                 },320/fast);
                         }
@@ -313,8 +324,8 @@ export default class SortingVisualizer extends Component{
                         }
             setTimeout(() => {
 
-                arrayBars[comparison[0]].style.backgroundColor = 'yellowgreen';
-                arrayBars[comparison[1]].style.backgroundColor = 'yellowgreen';
+                arrayBars[comparison[0]].style.backgroundColor = 'green';
+                arrayBars[comparison[1]].style.backgroundColor = 'green';
 
                             },300/fast) ;
             
@@ -329,6 +340,10 @@ export default class SortingVisualizer extends Component{
         
     render(){
 
+      let theme = `App`;
+    if (this.state.darkMode) theme += ` App_dark`;
+      
+
         // const sty={
             
         //     width:30
@@ -339,37 +354,25 @@ export default class SortingVisualizer extends Component{
         return(
             
             <div>
-              
             <Navbar
-        logo={sv}
+        style={{backgroundColor:"white"}}
         loader={<Loader type="Puff" color="#D85B5B" height={25} width={25} />}
         isLoading={this.state.isLoading}
-        // helpCallback={() => {
-        //   alert("I need help... and coffee...");
-        // }}
         menuItems={[
+
+          {
+            title: <span className="TopBar__Title">Sorting Visualizer</span>,
+            isAuth: true,
+            onClick:() => {this.refreshPage()}
+          },
           {
             title: "Generate New Array",
-            // icon: faUsers,
             isAuth: true,
             onClick: () => this.resetArray()
           },
-          {
-            title: "Set size",
-            // icon: faBookOpen,
-            // isAuth: () => {
-            //   // Claim authorization logic...
-            //   return false;
-            // },
-          },
-          {
-            title: "Set Size",
-            // icon: faGlobe,
-            // isAuth: true,
-          },
+          
           {
             title: "Algorithms",
-            // icon: faCogs,
             isAuth: true,
             subItems: [
               {

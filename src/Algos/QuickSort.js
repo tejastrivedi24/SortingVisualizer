@@ -74,10 +74,8 @@ export const QuickSortDesc = {
           faster than MergeSort and HeapSort. However, it is not a stable
           sorting algorithm, meaning that the relative positioning of
           equal sort items is not preserved.Quicksort is a divide and
-          conquer algorithm. Quicksort first divides a large array into
-          two smaller sub-arrays: the low elements and the high elements.
-          Quicksort can then recursively sort the sub-arrays. The steps
-          are:
+          conquer algorithm.
+          
         </p>
 
       </div>
